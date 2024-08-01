@@ -22,7 +22,17 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserApi } from "../api/UserApi";
 import { CookieApi } from "../api/CookieApi";
 
-const pages = ["Предметы", "Расписание"];
+const pages = [
+  {
+    name: "Предметы",
+    link: "/subjects"
+  },
+  {
+    name: "Расписание",
+    link: "/timetable",
+    disabled: true,
+  }
+];
 
 function NavBar(props) {
 
@@ -70,10 +80,12 @@ function NavBar(props) {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
-                  key={page}
+                  key={page.link}
+                  disabled={page.disabled}
+                  onClick={() => pushHistory(page.link)}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page}
+                  {page.name}
                 </Button>
               ))}
             </Box>
